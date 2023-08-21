@@ -15,7 +15,7 @@ class TipoTest extends TestCase
      *
      * @return void
      */
-    public function test_example()
+    public function test_funcao_index_retornar_array_com_sucesso()
     {
         //Criar parametros
         $tipos = Tipo::factory()->count(5)->create();
