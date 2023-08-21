@@ -19,6 +19,7 @@ class TipoFactory extends Factory
         return [
             //
             "descricao" => $this->faker->setence(),
+           
         ];
     }
 }
