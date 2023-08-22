@@ -30,12 +30,13 @@ class TipoTest extends TestCase
         //Verificar resposta
         $response
             ->assertStatus(200)
-            ->assertJsonCount(5,'data')
-            ->assertJsonStructure([
-                'data' =>[
-                    '*' =>['id','descricao','created_at','update_at']
+            ->assertJsonCount(5, 'data')
+            ->assertJsonStructure(
+                [
+                    'data' => [
+                        '*' => ['id', 'descricao', 'created_at', 'updated_at']
+                    ]
                 ]
-            ]
             );
     }
 }
