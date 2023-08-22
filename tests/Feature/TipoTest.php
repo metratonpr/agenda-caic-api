@@ -24,10 +24,12 @@ class TipoTest extends TestCase
         //Fazer uma chamada para a rota index no api
         //Usar verbo GET
         $response = $this->getJson('/api/tipos/');
-        
+
         // dd($response['data']);
 
         //Verificar resposta
-        $response->assertStatus(200);
+        $response
+            ->assertStatus(200)
+            ->assertJsonCount(5,'data');
     }
 }
