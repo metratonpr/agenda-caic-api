@@ -19,10 +19,13 @@ class TipoTest extends TestCase
     public function test_funcao_index_retornar_array_com_sucesso()
     {
         //Criar parametros
-        $tipos = Tipo::factory()->count(5)->create();
-        dd($tipos);
+        Tipo::factory()->count(5)->create();
         //Processar
-
+        //Fazer uma chamada para a rota index no api
+        //Usar verbo GET
+        $response = $this->getJson('/api/tipos/');
+        
+        dd($response);
         //Verificar resposta
     }
 }
