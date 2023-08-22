@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Tipo;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -19,7 +20,7 @@ class TipoTest extends TestCase
     {
         //Criar parametros
         $tipos = Tipo::factory()->count(5)->create();
-        dd($tipo);
+        dd($tipos);
         //Processar
 
         //Verificar resposta
