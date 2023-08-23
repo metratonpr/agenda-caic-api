@@ -91,4 +91,18 @@ class TipoTest extends TestCase
             'updated_at' => $tipo->updated_at
         ]);
     }
+    /**
+     * Deve dar erro ao tentar pesquisar um cadastro inexistente
+     * @return void
+     */
+    public function test_buscar_id_no_banco_com_falha(){
+
+        //processar
+        $response = $this->getJson('/api/tipos/99999999');
+        //verificar saida
+        $response->assertStatus(404)
+        ->assertJson([
+            'message' => "Tipo não encontrado!"
+        ]);
+    }
 }
