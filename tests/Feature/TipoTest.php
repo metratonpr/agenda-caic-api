@@ -73,4 +73,22 @@ class TipoTest extends TestCase
         $response->assertStatus(422)
         ->assertJsonValidationErrors(['descricao']);
     }
+    /**
+     * Buscar um id no servidor com sucesso!
+     * @return void
+     */
+    public function test_buscar_id_no_banco_com_sucesso(){
+        //Criar dados
+        $tipo = Tipo::factory()->create();
+        //processar
+        $response = $this->getJson('/api/tipos/'.$tipo->id);
+        //verificar saida
+        $response->assertStatus(200)
+        ->assertJson([
+            'id' => $tipo->id,
+            'descricao' => $tipo->descricao,
+            'created_at' => $tipo->created_at,
+            'updated_at' => $tipo->updated_at
+        ]);
+    }
 }
