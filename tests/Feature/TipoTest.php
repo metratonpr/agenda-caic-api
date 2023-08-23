@@ -57,4 +57,20 @@ class TipoTest extends TestCase
         ->assertJsonStructure(['id', 'descricao', 'created_at', 
         'updated_at']);
     }
+
+    /**
+     * Deve cadastrar um novo registro com falha
+     * @return void
+     */
+    public function test_criar_um_novo_tipo_com_falha(){
+        //Criar dados
+        $data =[
+            'descricao' => ""
+        ];
+        //Processar
+        $response = $this->postJson('/api/tipos/',$data);
+        //Avaliar a saida
+        $response->assertStatus(422)
+        ->assertJsonValidationErrors(['descricao']);
+    }
 }
