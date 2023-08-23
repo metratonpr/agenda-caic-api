@@ -18,7 +18,7 @@ class TipoTest extends TestCase
      */
     public function test_funcao_index_retornar_array_com_sucesso()
     {
-        $tipo = Tipo::factory()->create();
+        //$tipo = Tipo::factory()->create();
 
 
         //Criar parametros
@@ -39,5 +39,22 @@ class TipoTest extends TestCase
                     ]
                 ]
             );
+    }
+
+    /**
+     * Deve cadastrar um novo registro com sucesso
+     * @return void
+     */
+    public function test_criar_um_novo_tipo_com_sucesso(){
+        //Criar dados
+        $data =[
+            'descricao' => "Cancelado"
+        ];
+        //Processar
+        $response = $this->postJson('/api/tipos/',$data);
+        //Avaliar a saida
+        $response->assertStatus(201)
+        ->assertJsonStructure(['id', 'descricao', 'created_at', 
+        'updated_at']);
     }
 }
