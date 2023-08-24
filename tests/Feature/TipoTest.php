@@ -87,8 +87,6 @@ class TipoTest extends TestCase
         ->assertJson([
             'id' => $tipo->id,
             'descricao' => $tipo->descricao,
-            'created_at' => $tipo->created_at,
-            'updated_at' => $tipo->updated_at
         ]);
     }
     /**

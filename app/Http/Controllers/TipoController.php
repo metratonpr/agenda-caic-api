@@ -43,9 +43,16 @@ class TipoController extends Controller
      * @param  \App\Models\Tipo  $tipo
      * @return \Illuminate\Http\Response
      */
-    public function show(Tipo $tipo)
+    public function show($id)
     {
         //
+        $tipo = Tipo::find($id);
+
+        if(!$tipo){
+            return response()->json(['message' =>"Tipo não encontrado!"],404);
+        }
+
+        return response()->json($tipo);
     }
 
 
