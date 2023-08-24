@@ -125,4 +125,24 @@ class TipoTest extends TestCase
                 'descricao' => 'Nova descrição',
             ]);
      }
+
+      /**
+     * Teste de atualizacao com falha de tipo inexistente
+     * @return void
+     */
+
+     public function test_atualizar_tipo_inexistente_com_falha(){
+        //Criar dados
+        $new = [
+            'descricao' => 'Nova descrição'
+        ];
+        //Processar
+        $response = $this->putJson('/api/tipos/999999',$new);
+        //Analisar
+        // Verifique a resposta
+        $response->assertStatus(404)
+        ->assertJson([
+            'message' => "Tipo não encontrado!"
+        ]);
+     }
 }
