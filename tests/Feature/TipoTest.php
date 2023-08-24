@@ -103,4 +103,26 @@ class TipoTest extends TestCase
             'message' => "Tipo não encontrado!"
         ]);
     }
+
+    /**
+     * Teste de atualizacao com sucesso
+     * @return void
+     */
+
+     public function test_atualizar_tipo_com_sucesso(){
+        //Criar dados
+        $tipo = Tipo::factory()->create();
+        $new = [
+            'descricao' => 'Nova descrição'
+        ];
+        //Processar
+        $response = $this->putJson('/api/tipos/'.$tipo->id,$new);
+        //Analisar
+        // Verifique a resposta
+        $response->assertStatus(200)
+            ->assertJson([
+                'id' => $tipo->id,
+                'descricao' => 'Nova descrição',
+            ]);
+     }
 }

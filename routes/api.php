@@ -23,6 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/tipos/',[TipoController::class,'index'])->name('tipos.index');
 Route::post('/tipos/',[TipoController::class,'store'])->name('tipos.store');
 Route::get('/tipos/{tipo}',[TipoController::class,'show'])->name('tipos.show');
+Route::put('/tipos/{tipo}',[TipoController::class,'update'])->name('tipos.update');
 
 
 // Route::resource('/tipos',TipoController::class);
