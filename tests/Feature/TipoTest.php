@@ -45,63 +45,69 @@ class TipoTest extends TestCase
      * Deve cadastrar um novo registro com sucesso
      * @return void
      */
-    public function test_criar_um_novo_tipo_com_sucesso(){
+    public function test_criar_um_novo_tipo_com_sucesso()
+    {
         //Criar dados
-        $data =[
+        $data = [
             'descricao' => "Cancelado"
         ];
         //Processar
-        $response = $this->postJson('/api/tipos/',$data);
+        $response = $this->postJson('/api/tipos/', $data);
         //Avaliar a saida
         $response->assertStatus(201)
-        ->assertJsonStructure(['id', 'descricao', 'created_at', 
-        'updated_at']);
+            ->assertJsonStructure([
+                'id', 'descricao', 'created_at',
+                'updated_at'
+            ]);
     }
 
     /**
      * Deve cadastrar um novo registro com falha
      * @return void
      */
-    public function test_criar_um_novo_tipo_com_falha(){
+    public function test_criar_um_novo_tipo_com_falha()
+    {
         //Criar dados
-        $data =[
+        $data = [
             'descricao' => ""
         ];
         //Processar
-        $response = $this->postJson('/api/tipos/',$data);
+        $response = $this->postJson('/api/tipos/', $data);
         //Avaliar a saida
         $response->assertStatus(422)
-        ->assertJsonValidationErrors(['descricao']);
+            ->assertJsonValidationErrors(['descricao']);
     }
     /**
      * Buscar um id no servidor com sucesso!
      * @return void
      */
-    public function test_buscar_id_no_banco_com_sucesso(){
+    public function test_buscar_id_no_banco_com_sucesso()
+    {
         //Criar dados
         $tipo = Tipo::factory()->create();
         //processar
-        $response = $this->getJson('/api/tipos/'.$tipo->id);
+        $response = $this->getJson('/api/tipos/' . $tipo->id);
         //verificar saida
         $response->assertStatus(200)
-        ->assertJson([
-            'id' => $tipo->id,
-            'descricao' => $tipo->descricao,
-        ]);
+            ->assertJson([
+                'id' => $tipo->id,
+                'descricao' => $tipo->descricao,
+            ]);
     }
     /**
      * Deve dar erro ao tentar pesquisar um cadastro inexistente
      * @return void
      */
-    public function test_buscar_id_no_banco_com_falha(){
+    public function test_buscar_id_no_banco_com_falha()
+    {
 
         //processar
         $response = $this->getJson('/api/tipos/99999999');
         //verificar saida
         $response->assertStatus(404)
-        ->assertJson([
-            'message' => "Tipo não encontrado!"
-        ]);
+            ->assertJson([
+                'message' => "Tipo não encontrado!"
+            ]);
     }
 
     /**
@@ -109,14 +115,15 @@ class TipoTest extends TestCase
      * @return void
      */
 
-     public function test_atualizar_tipo_com_sucesso(){
+    public function test_atualizar_tipo_com_sucesso()
+    {
         //Criar dados
         $tipo = Tipo::factory()->create();
         $new = [
             'descricao' => 'Nova descrição'
         ];
         //Processar
-        $response = $this->putJson('/api/tipos/'.$tipo->id,$new);
+        $response = $this->putJson('/api/tipos/' . $tipo->id, $new);
         //Analisar
         // Verifique a resposta
         $response->assertStatus(200)
@@ -124,25 +131,65 @@ class TipoTest extends TestCase
                 'id' => $tipo->id,
                 'descricao' => 'Nova descrição',
             ]);
-     }
+    }
 
-      /**
+    /**
      * Teste de atualizacao com falha de tipo inexistente
      * @return void
      */
 
-     public function test_atualizar_tipo_inexistente_com_falha(){
+    public function test_atualizar_tipo_inexistente_com_falha()
+    {
         //Criar dados
         $new = [
             'descricao' => 'Nova descrição'
         ];
         //Processar
-        $response = $this->putJson('/api/tipos/999999',$new);
+        $response = $this->putJson('/api/tipos/999999', $new);
         //Analisar
         // Verifique a resposta
         $response->assertStatus(404)
-        ->assertJson([
-            'message' => "Tipo não encontrado!"
-        ]);
-     }
+            ->assertJson([
+                'message' => "Tipo não encontrado!"
+            ]);
+    }
+
+    /**
+     * Teste de atualizacao com falha nos dados
+     * @return void
+     */
+    public function test_atualizar_tipo_com_falha_nos_dados()
+    {
+        //Criar dados
+        $tipo = Tipo::factory()->create();
+        $new = [
+            'descricao' => ''
+        ];
+        //Processar
+        $response = $this->putJson('/api/tipos/' . $tipo->id, $new);
+        //Analisar
+        // Verifique a resposta
+        //Avaliar a saida
+        $response->assertStatus(422)
+            ->assertJsonValidationErrors(['descricao']);
+    }
+
+    /**
+     * Teste de atualizacao com falha na descricao unica
+     * @return void
+     */
+    public function test_atualizar_tipo_com_falha_na_descricao_unica()
+    {
+        //Criar dados
+        $tipo = Tipo::factory()->create();
+        $updated = Tipo::factory()->create();
+        // Para para upgrade
+        $new = ['descricao' => $tipo->descricao,];
+        //Processar
+        $response = $this->putJson('/api/tipos/' . $updated->id, $new);
+        //Avaliar a saida
+        $response->assertStatus(422)
+            ->assertJsonValidationErrors(['descricao']);
+    }
+
 }
