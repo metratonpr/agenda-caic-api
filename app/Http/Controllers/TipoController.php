@@ -63,9 +63,20 @@ class TipoController extends Controller
      * @param  \App\Models\Tipo  $tipo
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateTipoRequest $request, Tipo $tipo)
+    public function update(UpdateTipoRequest $request, $id)
     {
-        //
+         // Procure o tipo pela id
+         $tipo = Tipo::find($id);
+         
+         if (!$tipo) {
+             return response()->json(['message' => 'Tipo não encontrado!'], 404);
+         }
+ 
+         // Faça o update do tipo
+         $tipo->update($request->all());
+ 
+         // Retorne o tipo
+         return response()->json($tipo);
     }
 
     /**
