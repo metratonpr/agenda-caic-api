@@ -20,7 +20,6 @@ class TipoTest extends TestCase
     {
         //$tipo = Tipo::factory()->create();
 
-
         //Criar parametros
         Tipo::factory()->count(5)->create();
         //Processar
@@ -100,7 +99,6 @@ class TipoTest extends TestCase
      */
     public function test_buscar_id_no_banco_com_falha()
     {
-
         //processar
         $response = $this->getJson('/api/tipos/99999999');
         //verificar saida
@@ -192,4 +190,6 @@ class TipoTest extends TestCase
             ->assertJsonValidationErrors(['descricao']);
     }
 
+
+    
 }
