@@ -195,17 +195,31 @@ class TipoTest extends TestCase
      * Deve deletar com sucesso um registro do banco
      */
     public function test_deletar_tipo_com_sucesso(){
-
         //Criar o tipo
         $tipo = Tipo::factory()->create();
 
         //Processar
-        $response = $this->putJson('/api/tipos/'.$tipo->id);
+        $response = $this->deleteJson('/api/tipos/'.$tipo->id);
         //Analisar
         // Verifique a resposta
         $response->assertStatus(200)
             ->assertJson([
                 'message' => "Tipo deletado com sucesso!"
+            ]);
+    }
+
+    /**
+     * Deve dar erro ao deletar um registro inexistente
+     */
+    public function test_deletar_tipo_com_falha(){
+
+        //Processar
+        $response = $this->deleteJson('/api/tipos/999999');
+        //Analisar
+        // Verifique a resposta
+        $response->assertStatus(404)
+            ->assertJson([
+                'message' => "Tipo não encontrado!"
             ]);
     }
 }
