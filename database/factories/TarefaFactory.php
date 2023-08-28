@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Tipo>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Tarefa>
  */
-class TipoFactory extends Factory
+class TarefaFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +18,6 @@ class TipoFactory extends Factory
     {
         return [
             //
-            "descricao" => $this->faker->name           
         ];
     }
 }

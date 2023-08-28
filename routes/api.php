@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TarefaController;
 use App\Http\Controllers\TipoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,17 @@ Route::put('/tipos/{tipo}', [TipoController::class, 'update'])
     ->name('tipos.update');
 Route::delete('/tipos/{tipo}', [TipoController::class, 'destroy'])
     ->name('tipos.destroy');
+
+Route::get('/tarefas/', [TarefaController::class, 'index'])
+    ->name('tarefas.index');
+Route::post('/tarefas/', [TarefaController::class, 'store'])
+    ->name('tarefas.store');
+Route::get('/tarefas/{tipo}', [TarefaController::class, 'show'])
+    ->name('tarefas.show');
+Route::put('/tarefas/{tipo}', [TarefaController::class, 'update'])
+    ->name('tarefas.update');
+Route::delete('/tarefas/{tipo}', [TarefaController::class, 'destroy'])
+    ->name('tarefas.destroy');
 
 
 // Route::resource('/tipos',TipoController::class);
