@@ -13,7 +13,8 @@ class StoreTarefaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+  
+        return true;
     }
 
     /**
@@ -25,6 +26,11 @@ class StoreTarefaRequest extends FormRequest
     {
         return [
             //
+            'data' => 'required | date', 
+            'assunto' => 'required | min:2 | max: 50', 
+            'descricao' => 'required | min: 2 | max: 240' , 
+            'contato' => 'required | min: 2 | max: 50', 
+            'tipo_id' =>'required | exists:tipos,id'
         ];
     }
 }
