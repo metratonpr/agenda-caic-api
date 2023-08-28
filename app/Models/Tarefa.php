@@ -9,9 +9,10 @@ class Tarefa extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['data','assunto','descricao','contato','tipo_id'];
+    protected $fillable = ['data', 'assunto', 'descricao', 'contato', 'tipo_id'];
 
-    public function tipo(){
-        $this->belongsTo(Tipo::class,'tipo_id');
+    public function tipo()
+    {
+       return $this->belongsTo(Tipo::class, 'tipo_id');
     }
 }
