@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Tipo;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,13 @@ class TarefaFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'data' => $this->faker()->date, 
+            'assunto' => $this->faker()->word, 
+            'descricao' => $this->faker()->sentence, 
+            'contato' => $this->faker()->name, 
+            'tipo_id' => function(){
+                return Tipo::factory()->create()->id;
+            }
         ];
     }
 }

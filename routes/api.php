@@ -45,3 +45,4 @@ Route::delete('/tarefas/{tipo}', [TarefaController::class, 'destroy'])
 
 
 // Route::resource('/tipos',TipoController::class);
+// Route::apiresource('/tipos',TipoController::class);
