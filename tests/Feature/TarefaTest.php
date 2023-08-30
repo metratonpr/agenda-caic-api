@@ -19,19 +19,17 @@ class TarefaTest extends TestCase
     public function test_funcao_index_retornar_array_com_sucesso()
     {
         //Criar parametros
-        Tarefa::factory()->count(5)->create();
-       
+        Tarefa::factory()->count(5)->create();       
         //Usar verbo GET
         $response = $this->getJson('/api/tipos/');
-        // dd($response['data']);
-        //Verificar resposta
         $response
             ->assertStatus(200)
             ->assertJsonCount(5, 'data')
             ->assertJsonStructure(
                 [
                     'data' => [
-                        '*' => ['id', 'descricao', 'created_at', 'updated_at']
+                        '*' => ['id', 'data', 'assunto', 'descricao', 
+                        'contato', 'tipo_id', 'created_at', 'updated_at']
                     ]
                 ]
             );
